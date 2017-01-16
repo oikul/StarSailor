@@ -20,7 +20,8 @@ public class Main extends AbstractMain {
 	private static final long serialVersionUID = 1L;
 	private static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 	public static float ratio;
-	private Menu mainMenu, playMenu, hostMenu, connectMenu;
+	private Menu mainMenu, hostMenu, connectMenu;
+	private PlayMenu playMenu;
 	private Galaxy galaxy;
 
 	@Override
@@ -66,7 +67,11 @@ public class Main extends AbstractMain {
 		case MENU_PLAY:
 			switchState = playMenu.update(time);
 			if(switchState == State.PLAY){
-				
+				galaxy = new Galaxy(playMenu.getSeed());
+				State.changeState(State.STATE.GAME_GALACTIC);
+				this.remove(playMenu);
+				this.add(galaxy);
+				this.setVisible(running);
 			}else if(switchState == State.MAIN){
 				mainMenu = new MainMenu("backgrounds/space");
 				State.changeState(State.STATE.MENU_MAIN);
@@ -80,7 +85,7 @@ public class Main extends AbstractMain {
 			break;
 		case MENU_CONNECT:
 			break;
-		case GAME_GALAXY:
+		case GAME_GALACTIC:
 			break;
 		default:
 			break;
@@ -93,7 +98,7 @@ public class Main extends AbstractMain {
 		BufferedImage bImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = (Graphics2D) bImage.getGraphics();
 		switch(State.state){
-		case GAME_GALAXY:
+		case GAME_GALACTIC:
 			galaxy.draw(g2d);
 			break;
 		case GAME_SOLAR:
@@ -102,10 +107,13 @@ public class Main extends AbstractMain {
 		case GAME_PLANETARY:
 			galaxy.draw(g2d);
 			break;
-		case GAME_MOON:
+		case GAME_LUNAR:
 			galaxy.draw(g2d);
 			break;
-		case GAME_SURFACE:
+		case GAME_SURFACE_PLANET:
+			galaxy.draw(g2d);
+			break;
+		case GAME_SURFACE_MOON:
 			galaxy.draw(g2d);
 			break;
 		case GAME_BATTLE:
