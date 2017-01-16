@@ -95,6 +95,7 @@ public class Main extends AbstractMain {
 			}
 			break;
 		case GAME_GALACTIC:
+			galaxy.update(time);
 			break;
 		default:
 			break;

@@ -1,16 +1,18 @@
 package galaxy;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import handlers.InputHandler;
 import main.State;
 
 public class Galaxy extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private long seed;
-	private int numOfStars = 4096, maxPlanets = 12, maxMoons = 8, currentStar, currentPlanet, currentMoon;
+	private int numOfStars = 512, maxPlanets = 12, maxMoons = 8, currentStar, currentPlanet, currentMoon;
 	private Star[] galaxy = new Star[numOfStars];
 	private Planet[][] solarSystems = new Planet[numOfStars][maxPlanets];
 	private Planet[][][] planets = new Planet[numOfStars][maxPlanets][maxMoons];
@@ -18,6 +20,7 @@ public class Galaxy extends JPanel {
 
 	public Galaxy(long seed) {
 		this.seed = seed;
+		initialiseGalaxy();
 	}
 
 	public void initialiseGalaxy() {
@@ -61,8 +64,13 @@ public class Galaxy extends JPanel {
 	}
 
 	public void draw(Graphics g) {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, InputHandler.screenSize.width, InputHandler.screenSize.height);
 		switch(State.state){
 		case GAME_GALACTIC:
+			for (Star s : galaxy) {
+				s.draw(g);
+			}
 			break;
 		case GAME_SOLAR:
 			break;
