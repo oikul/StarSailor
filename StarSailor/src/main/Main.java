@@ -76,7 +76,6 @@ public class Main extends AbstractMain {
 				mainMenu = new MainMenu("backgrounds/space");
 				State.changeState(State.STATE.MENU_MAIN);
 				this.remove(playMenu);
-				this.repaint();
 				this.add(mainMenu);
 				this.setVisible(true);
 			}
@@ -84,6 +83,16 @@ public class Main extends AbstractMain {
 		case MENU_HOST:
 			break;
 		case MENU_CONNECT:
+			switchState = connectMenu.update(time);
+			if(switchState == State.PLAY){
+				
+			}else if(switchState == State.MAIN){
+				mainMenu = new MainMenu("backgrounds/space");
+				State.changeState(State.STATE.MENU_MAIN);
+				this.remove(connectMenu);
+				this.add(mainMenu);
+				this.setVisible(true);
+			}
 			break;
 		case GAME_GALACTIC:
 			break;

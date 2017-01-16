@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import handlers.InputHandler;
+import main.State;
 import menus.Button;
 import menus.Label;
 import menus.Menu;
@@ -34,8 +35,8 @@ public class ConnectMenu extends Menu {
 	}
 
 	public int update(float time) {
-		if (connect.buttonPressed()) {
-			
+		if (back.buttonPressed()) {
+			return State.MAIN;
 		}
 		return 0;
 	}
