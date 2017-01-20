@@ -65,7 +65,7 @@ public class PlayMenu extends Menu {
 	}
 	
 	public long getSeed(){
-		return Long.parseLong(seedBox.getText());
+		return Long.parseLong(seedBox.getText(), 36);
 	}
 
 }

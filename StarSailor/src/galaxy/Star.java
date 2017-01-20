@@ -19,8 +19,8 @@ public class Star {
 
 	public Star(long seed) {
 		random = new Random(seed);
-		size = random.nextInt(3) + 1;
-		distance = random.nextDouble() * 1000;
+		size = random.nextInt(4) + 3;
+		distance = random.nextDouble() * 10000;
 		angle = random.nextDouble() * 360;
 		position = MathHandler.convertPolarToCartesian(angle, distance, InputHandler.midPoint.x,
 				InputHandler.midPoint.y);
@@ -44,10 +44,14 @@ public class Star {
 	}
 
 	public void draw(Graphics g) {
+		draw(g, 1);
+	}
+	
+	public void draw(Graphics g, int zoom) {
 		switch (State.state) {
 		case GAME_GALACTIC:
 			g.setColor(color);
-			g.fillOval((int) position.x, (int) position.y, size, size);
+			g.fillOval((int) position.x, (int) position.y, size * zoom, size * zoom);
 			break;
 		default:
 			break;
